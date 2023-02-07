@@ -1,4 +1,4 @@
-package DTO;
+package com.educandoweb.course.DTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
