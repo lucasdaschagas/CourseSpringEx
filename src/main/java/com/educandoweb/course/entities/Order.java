@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,10 +18,13 @@ import java.time.Instant;
 public class Order implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant moment;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id") //Foreign key
     private User client;
