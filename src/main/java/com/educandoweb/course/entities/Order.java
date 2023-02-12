@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import com.educandoweb.course.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -10,7 +11,6 @@ import java.io.Serializable;
 import java.time.Instant;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -32,6 +32,24 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id") //Foreign key
     private User client;
 
+    private Integer orderStatus;
+
+   public Order(Long id, Instant moment, OrderStatus orderStatus, User client)
+   {
+       this.id = id;
+       this.moment = moment;
+       this.client = client;
+      setOrderStatus(orderStatus);
+   }
+
+   public OrderStatus getOrderStatus(){
+       return OrderStatus.valueOf(orderStatus);
+   }
+   public void setOrderStatus(OrderStatus orderStatus) {
+       if (orderStatus != null) {
+           this.orderStatus = orderStatus.getCode();
+       }
+   }
 //    @Enumerated(EnumType.STRING)
 //    private OrderStatus orderstatus;
 }
