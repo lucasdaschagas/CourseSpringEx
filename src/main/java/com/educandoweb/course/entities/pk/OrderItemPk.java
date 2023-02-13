@@ -10,10 +10,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data
+import java.io.Serializable;
+
+@Getter
+@Setter
 @EqualsAndHashCode
 @Embeddable
-public class OrderItemPk {
+public class OrderItemPk implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
