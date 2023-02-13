@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import com.educandoweb.course.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -32,6 +33,6 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id") //Foreign key
     private User client;
 
-//    @Enumerated(EnumType.STRING)
-//    private OrderStatus orderstatus;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderstatus;
 }
