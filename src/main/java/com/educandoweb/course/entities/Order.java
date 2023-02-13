@@ -31,11 +31,6 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id") //Foreign key
     private User client;
-
-<<<<<<< HEAD
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderstatus;
-=======
     private Integer orderStatus;
 
    public Order(Long id, Instant moment, OrderStatus orderStatus, User client)
@@ -54,7 +49,5 @@ public class Order implements Serializable {
            this.orderStatus = orderStatus.getCode();
        }
    }
-//    @Enumerated(EnumType.STRING)
-//    private OrderStatus orderstatus;
->>>>>>> 7627677da9dbc96005fe04049ef5662ac2650fe3
+
 }
