@@ -24,6 +24,8 @@ public class Product {
     private String description;
     private Double price;
     private String imgUrl;
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
