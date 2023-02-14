@@ -1,31 +1,36 @@
 package com.educandoweb.course.entities;
 
 import com.educandoweb.course.entities.pk.OrderItemPk;
-import jakarta.persistence.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity(name = "orderItem" )
 @Table(name = "tb_order_item")
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class OrderItem implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
 
     @EmbeddedId
-    private OrderItemPk id;
+    private OrderItemPk id = new OrderItemPk();
     private Integer quantity;
     private Double price;
 
     public OrderItem(Order order, Product product,Integer quantity, Double price) {
-        this.quantity = quantity;
-        this.price = price;
         id.setOrder(order);
         id.setProduct(product);
+        this.quantity = quantity;
+        this.price = price;
+
     }
 
     public Integer getQuantity() {
@@ -43,6 +48,8 @@ public class OrderItem implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }
@@ -56,4 +63,16 @@ public class OrderItem implements Serializable {
         id.setProduct(product);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        OrderItem orderItem = (OrderItem) o;
+        return id != null && Objects.equals(id, orderItem.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
