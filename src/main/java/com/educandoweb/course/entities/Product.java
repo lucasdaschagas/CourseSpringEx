@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Entity(name = "product")
+@Entity(name = "products")
 @Table(name = "tb_products")
 public class Product {
     @Serial

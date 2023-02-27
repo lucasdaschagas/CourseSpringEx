@@ -17,7 +17,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(of = "id")
 @Entity(name = "orders")
-@Table(name = "tb_order")
+@Table(name = "tb_orders")
 public class Order implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -36,7 +36,7 @@ public class Order implements Serializable {
 
 
     @OneToMany(mappedBy = "id.order")
-    private Set<OrderItem> item = new HashSet<>();
+    private Set<OrderItem> items = new HashSet<>();
     private Integer orderStatus;
 
    public Order(Long id, Instant moment, OrderStatus orderStatus, User client)
@@ -56,8 +56,9 @@ public class Order implements Serializable {
        }
    }
 
+
     public Set<OrderItem> getItem() {
-        return item;
+        return items;
     }
 
 }
