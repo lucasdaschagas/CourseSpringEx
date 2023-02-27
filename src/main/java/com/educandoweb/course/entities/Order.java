@@ -29,10 +29,11 @@ public class Order implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 'T' HH:mm:ss 'Z'" , timezone = "GMT")
     private Instant moment;
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "client_id") //Foreign key
     private User client;
+
 
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> item = new HashSet<>();
