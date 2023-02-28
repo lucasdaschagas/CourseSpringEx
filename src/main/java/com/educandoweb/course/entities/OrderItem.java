@@ -1,6 +1,6 @@
 package com.educandoweb.course.entities;
 
-import com.educandoweb.course.entities.pk.OrderItemPk;
+import com.educandoweb.course.entitiesPk.OrderItemPk;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -8,11 +8,12 @@ import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity(name = "orderItem" )
+@Entity
 @Table(name = "tb_order_item")
 @NoArgsConstructor
 public class OrderItem implements Serializable {
@@ -21,7 +22,7 @@ public class OrderItem implements Serializable {
 
 
     @EmbeddedId
-    private OrderItemPk id = new OrderItemPk();
+    private final OrderItemPk id = new OrderItemPk();
     private Integer quantity;
     private Double price;
 
@@ -48,6 +49,8 @@ public class OrderItem implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+
 
     @JsonIgnore
     public Order getOrder(){

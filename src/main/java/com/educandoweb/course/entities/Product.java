@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Entity(name = "product")
+@Entity
 @Table(name = "tb_products")
 public class Product {
     @Serial
@@ -24,6 +24,9 @@ public class Product {
     private String description;
     private Double price;
     private String imgUrl;
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> item = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",

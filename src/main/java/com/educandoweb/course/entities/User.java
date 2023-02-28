@@ -31,8 +31,8 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList();
 
-    public User( String nome, String email, String phone, String password) {
-
+    public User( Long id, String nome, String email, String phone, String password) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.phone = phone;
