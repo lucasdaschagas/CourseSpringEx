@@ -3,7 +3,6 @@ package com.educandoweb.course.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
@@ -21,7 +20,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
+    private String name;
     private String description;
     private Double price;
     private String imgUrl;
@@ -36,9 +35,9 @@ public class Product {
     private Set<Category> categories = new HashSet<>();
 
 
-    public Product(Long id, String nome, String description, Double price, String imgUrl) {
+    public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
@@ -48,8 +47,8 @@ public class Product {
         this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setDescription(String description) {
@@ -64,13 +63,14 @@ public class Product {
         this.imgUrl = imgUrl;
     }
 
+    public String getName() {
+        return name;
+    }
     public Long getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
+
 
     public String getDescription() {
         return description;
