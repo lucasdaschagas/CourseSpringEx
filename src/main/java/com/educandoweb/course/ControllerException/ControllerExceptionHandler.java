@@ -1,6 +1,7 @@
 package com.educandoweb.course.ControllerException;
 
 import com.educandoweb.course.exception.ControllerNotFoundException;
+import com.educandoweb.course.exception.DataBaseException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -23,4 +24,12 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
 
     }
-}
+    @ExceptionHandler(DataBaseException.class)
+    public ResponseEntity<StandardError> controllerNotFound(DataBaseException e, HttpServletRequest request) {
+        String error = "Database error";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+
+
+    }}
