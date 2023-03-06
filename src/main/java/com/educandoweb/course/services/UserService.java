@@ -30,6 +30,7 @@ public class UserService {
     public User insert (User obj){
         return repository.save(obj);
     }
+
     public void delete( Long id) {
         try {
             repository.deleteById(id);
@@ -39,15 +40,17 @@ public class UserService {
             throw new DataBaseException(e.getMessage());
         }
     }
+
     public User update(Long id, User obj){
-        try{
+
+    try{
         User entity = repository.getReferenceById(id);
         updateData(entity,obj);
         return repository.save(entity);}
 
-        catch (EntityNotFoundException e){
-          throw new  ControllerNotFoundException(id);
-        }
+    catch (EntityNotFoundException e) {
+        throw new ControllerNotFoundException(id);
+    }
 
     }
 
