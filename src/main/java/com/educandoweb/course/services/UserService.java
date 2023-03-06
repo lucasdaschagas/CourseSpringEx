@@ -5,6 +5,7 @@ import com.educandoweb.course.entities.User;
 import com.educandoweb.course.exception.ControllerNotFoundException;
 import com.educandoweb.course.exception.DataBaseException;
 import com.educandoweb.course.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -39,15 +40,21 @@ public class UserService {
         }
     }
     public User update(Long id, User obj){
+        try{
         User entity = repository.getReferenceById(id);
         updateData(entity,obj);
-        return repository.save(entity);
+        return repository.save(entity);}
+
+        catch (EntityNotFoundException e){
+          throw new  ControllerNotFoundException(id);
+        }
 
     }
 
     private void updateData(User entity, User obj) {
         entity.setName(obj.getName());
-        entity.setEmail(obj.getName());
-        entity.setPhone(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhone(obj.getPhone());
+        entity.setPassword(obj.getPassword());
     }
 }

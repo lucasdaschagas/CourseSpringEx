@@ -18,7 +18,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(ControllerNotFoundException.class)
     public ResponseEntity<StandardError> controllerNotFound(ControllerNotFoundException e, HttpServletRequest request){
-        String error = "Parem de mandar mensagem de visu unica filhos da puta do caralho";
+        String error = "Resource not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
@@ -32,4 +32,6 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
 
 
-    }}
+    }
+
+}
